@@ -22,7 +22,6 @@ public  void clickSignUp(){
 //6. Enter name and email address
     signuppage.enterNameandEmail();
 //7. Click 'Signup' button
-    signuppage.createNewUser();
 //8. Verify that 'ENTER ACCOUNT INFORMATION' is visible
     signuppage.enterAccountinfo();
 //9. Fill details: Title, Name, Email, Password, Date of birth
