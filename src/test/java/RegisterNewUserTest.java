@@ -5,22 +5,21 @@ import pages.HomePage;
 import pages.SignupandLoginPage;
 
 public class RegisterNewUserTest extends BaseTest {
-   // WebDriver driver;
     HomePage homepage;
     SignupandLoginPage signuppage;
 
-
-    //Navigate to url 'http://automationexercise.com'
     //Verify that home page is visible successfully Take screenshot
     @Test
     public void registerNewUser() {
-        //Click on 'Signup / Login' button
+        //Navigate to url 'http://automationexercise.com'
+        driver.get("http://automationexercise.com");
         homepage = new HomePage(driver);
         signuppage = new SignupandLoginPage(driver);
+        //Click on 'Signup / Login' button
         homepage.clickSignUp();
         //Verify 'New User Signup!' is visible
-        String verifiymessage = signuppage.verifyMessage();
-        Assert.assertEquals(verifiymessage, "New User Signup!");
+        String verificationmessage = signuppage.verifyMessage();
+        Assert.assertEquals(verificationmessage, "New User Signup!");
 
         //Enter name and email address
         signuppage.enterNameandEmail();
@@ -30,7 +29,7 @@ public class RegisterNewUserTest extends BaseTest {
         signuppage.enterAddressinfo();
         //Verify that 'ACCOUNT CREATED!' is visible
         String successMessage = signuppage.clickCreateAccount();
-        Assert.assertEquals(successMessage,"ACCOUNT CREATED!");
+        Assert.assertEquals(successMessage, "ACCOUNT CREATED!");
         //Click 'Continue' button
         signuppage.clickContinue();
 /*

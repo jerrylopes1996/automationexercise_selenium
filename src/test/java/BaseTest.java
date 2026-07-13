@@ -4,26 +4,23 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
 public class BaseTest {
-    WebDriver driver;
-   // String url = "http://automationexercise.com";
+    protected WebDriver driver;  //findout why protected?
+
     @BeforeTest
 //    executable code must live inside a method block;
 //    you cannot write code statements directly inside the class body.
-    public  void setup( ){
+    public void setup() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        //driver.get(url);
     }
-
-
 
 
     @AfterTest
-    public  void close(){
-       driver.quit();
+    public void tearDown() {
+        if (driver != null) {  //understand the logic
+            driver.quit();
+        }
     }
-
-
 
 
 }
