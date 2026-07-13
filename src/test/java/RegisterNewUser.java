@@ -1,20 +1,26 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
-
+import pages.HomePage;
+import pages.SignupandLoginPage;
 public class RegisterNewUser extends BaseTest {
   WebDriver driver;
+  HomePage homepage;
+  SignupandLoginPage signuppage;
     //Test Case 1: Register User
   //1. Launch browser
-   driver.get("'http://automationexercise.com'")
+   driver.get("'http://automationexercise.com'");
 
 //2. Navigate to url 'http://automationexercise.com'
 //            3. Verify that home page is visible successfully
 //4. Click on 'Signup / Login' button
+public  void clickSignUp(){
     homepage.clickSignUp();
 //5. Verify 'New User Signup!' is visible
     signuppage.verifyMessage();
+
 //6. Enter name and email address
+    signuppage.enterNameandEmail();
 //7. Click 'Signup' button
     signuppage.createNewUser();
 //8. Verify that 'ENTER ACCOUNT INFORMATION' is visible
@@ -33,4 +39,5 @@ public class RegisterNewUser extends BaseTest {
 //17. Click 'Delete Account' button
      signuppage.deleteAccount();
 //18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
+}
 }
