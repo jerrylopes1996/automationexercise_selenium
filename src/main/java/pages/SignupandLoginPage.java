@@ -18,15 +18,17 @@ public class SignupandLoginPage {
     private final By newsletter = By.xpath("//input[text()='Name']");
     private final By specialoffer = By.xpath("//input[text()='Name']");
     private final By verificationMessage = By.xpath("");
+    private final By successfulMessage = By.xpath("");
     private final By continueBtn = By.xpath("");
 
     public SignupandLoginPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    public void verifyMessage() {
+    public String verifyMessage() {
         String message;
         message = driver.findElement(newUserSignUpMessage).getText();
+        return message;
         //assertEquals("some",message);
     }
 
@@ -53,7 +55,11 @@ public class SignupandLoginPage {
     public  void enterAddressinfo(){
 
     }
-    public  void clickCreateAccount(){
+    public  String clickCreateAccount(){
+        driver.findElement(continueBtn).click();
+        String accntCreationMessage = driver.findElement(successfulMessage).getText();
+        return accntCreationMessage;
+
 
     }
     public void clickContinue() {
