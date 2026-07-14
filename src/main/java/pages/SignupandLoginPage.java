@@ -4,7 +4,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.File;
 import java.time.Duration;
 
 public class SignupandLoginPage {
@@ -12,9 +11,7 @@ public class SignupandLoginPage {
     WebDriverWait wait; //?
     private final By newUserSignUpMessage = By.xpath("//h2[text()='New User Signup!']");
     private final By nameOnSingUpPage = By.xpath("//input[@placeholder='Name']");
-    //private final By name_One = By.xpath("//input[@id='name']");
     private final By email = By.xpath("//input[@data-qa='signup-email']");
-   // private final By email_One = By.xpath("//input[@id='email']");
     private final By signUp = By.xpath("//button[text()='Signup']");
     private final By mr = By.xpath("//input[@type = 'radio' and @value='Mr']");
     private final By password = By.xpath("//input[@id='password']");
@@ -37,11 +34,12 @@ public class SignupandLoginPage {
     private final By city = By.xpath("//input[@id='city']");
     private final By zipcode = By.xpath("//input[@id='zipcode']");
     private final By mobileNumber = By.xpath("//input[@id='mobile_number']");
-    private final By deleteBtn = By.linkText(" Delete Account");
+    private final By deleteBtn = By.xpath("//a[@href='/delete_account']");
     private final By continueLink = By.xpath("//*[text()='Continue']");
+
     public SignupandLoginPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));//5  seconds s
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));//5  seconds s
     }
 
     public String verifyMessage() {
@@ -51,10 +49,10 @@ public class SignupandLoginPage {
 
     }
 
-    public void enterNameandEmail() {
+    public void enterNameAndEmail(String Name, String Email) {
         try {
-            driver.findElement(nameOnSingUpPage).sendKeys("Tom");
-            driver.findElement(email).sendKeys("TomCat34909@gmail.com");  //learn and implement java random module for string!
+            driver.findElement(nameOnSingUpPage).sendKeys(Name);    // think how to implement wait for textbox
+            driver.findElement(email).sendKeys(Email);  //learn and implement java random module for string!
             driver.findElement(signUp).click();
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -71,45 +69,58 @@ public class SignupandLoginPage {
 
     }
 
+    // need to make this method dynamic think about it
     public void enterDOB() {
         driver.findElement(day).click();
         driver.findElement(month).click();
         driver.findElement(year).getText();
     }
 
-    public void selectNewsletterandSpecialOffer() {
+    public void selectNewsletterAndSpecialOffer() {
         try {
             //Need your feedback here
             wait.until(ExpectedConditions.elementToBeClickable(newsletter)).click();
-           // driver.findElement(newsletter).click();
+            // driver.findElement(newsletter).click();
             //driver.findElement(specialoffer).click();
             wait.until(ExpectedConditions.elementToBeClickable(specialoffer)).click();
         } catch (WebDriverException e) {
             throw new RuntimeException(e);
-           // System.err.println(e); bad practice find out why?
+            // System.err.println(e); bad practice find out why?
         }
     }
 
-    public void enterAddressinfo() {
-        driver.findElement(firstName).sendKeys("tom");
-        driver.findElement(lastName).sendKeys("cat");
-        driver.findElement(company).sendKeys("ohoh");
-        driver.findElement(address).sendKeys("w e  ajnonoin");
-        driver.findElement(country);
-        driver.findElement(state).sendKeys("experiment");
-        driver.findElement(city).sendKeys("vancouer");
-        driver.findElement(zipcode).sendKeys("303303");
-        driver.findElement(mobileNumber).sendKeys("34567890");
+    // need to pass values as arguements,Implpementation pending
+    public void enterAddressInfo() {
+//        driver.findElement(firstName).sendKeys("tom");
+//        driver.findElement(lastName).sendKeys("cat");
+//        driver.findElement(company).sendKeys("ohoh");
+        driver.findElement(address).sendKeys("Apollo Bandar, Colaba, Mumbai");
+        driver.findElement(country);  //Need to implement dynamic inputs
+        driver.findElement(state).sendKeys("Maharashtra");
+        driver.findElement(city).sendKeys("Bombay");
+        driver.findElement(zipcode).sendKeys("404303");
 
+    }
 
+    public void enterMobileNumber(String MobileNumber) {
+        driver.findElement(mobileNumber).sendKeys(MobileNumber);
+    }
+
+    public void enterFirstAndLastName(String FirstName, String LastName) {
+        driver.findElement(firstName).sendKeys(FirstName);
+        driver.findElement(lastName).sendKeys(LastName);
+    }
+
+    public void enterCompanyName(String CompanyName) {
+        driver.findElement(company).sendKeys(CompanyName);
     }
 
     public void clickCreateAccount() {
         driver.findElement(createAccountBtn).click();
         //String accntCreationMessage;
-       // wait.until(ExpectedConditions.textToBePresentInElementValue(successfulMessage,"acnt created"));
-      //  accntCreationMessage = driver.findElement(successfulMessage).getText();
-      //  return accntCreationMessage;
+        // wait.until(ExpectedConditions.textToBePresentInElementValue(successfulMessage,"acnt created"));
+        //  accntCreationMessage = driver.findElement(successfulMessage).getText();
+        //  return accntCreationMessage;
 
 
     }
@@ -119,16 +130,12 @@ public class SignupandLoginPage {
         wait.until(ExpectedConditions.elementToBeClickable(continueBtn)).click();
     }
 
-    public String deleteAccount() {
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(deleteBtn)).click();
-            String deletemessage ;
-            deletemessage = driver.findElement(deleteconfirmatiomessage).getText();
-            driver.findElement(continueLink);
-            return deletemessage;
-        } catch (WebDriverException e) {
-            throw new WebDriverException(e);
-        }
+    public void deleteAccount() {
+        driver.findElement(deleteBtn).click();
+    }
+
+    public String accountDeletionConfirmationMessage() {
+        return driver.findElement(deleteconfirmatiomessage).getText();
     }
 }
 
