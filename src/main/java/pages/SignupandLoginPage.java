@@ -1,9 +1,6 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -51,13 +48,17 @@ public class SignupandLoginPage {
         String message;
         message = driver.findElement(newUserSignUpMessage).getText();
         return message;
-        //assertEquals("some",message);
+
     }
 
     public void enterNameandEmail() {
-        driver.findElement(nameOnSingUpPage).sendKeys("Tom");
-        driver.findElement(email).sendKeys("TomCat34909@gmail.com");  //learn and implement java random module for string!
-        driver.findElement(signUp).click();
+        try {
+            driver.findElement(nameOnSingUpPage).sendKeys("Tom");
+            driver.findElement(email).sendKeys("TomCat34909@gmail.com");  //learn and implement java random module for string!
+            driver.findElement(signUp).click();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void enterAccountinfo() {
@@ -77,8 +78,16 @@ public class SignupandLoginPage {
     }
 
     public void selectNewsletterandSpecialOffer() {
-        driver.findElement(newsletter).click();
-        driver.findElement(specialoffer).click();
+        try {
+            //Need your feedback here
+            wait.until(ExpectedConditions.elementToBeClickable(newsletter)).click();
+           // driver.findElement(newsletter).click();
+            //driver.findElement(specialoffer).click();
+            wait.until(ExpectedConditions.elementToBeClickable(specialoffer)).click();
+        } catch (WebDriverException e) {
+            throw new RuntimeException(e);
+           // System.err.println(e); bad practice find out why?
+        }
     }
 
     public void enterAddressinfo() {
@@ -111,11 +120,15 @@ public class SignupandLoginPage {
     }
 
     public String deleteAccount() {
-        wait.until(ExpectedConditions.elementToBeClickable(deleteBtn)).click();
-        String deletemessage ;
-        deletemessage = driver.findElement(deleteconfirmatiomessage).getText();
-        driver.findElement(continueLink);
-        return deletemessage;
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(deleteBtn)).click();
+            String deletemessage ;
+            deletemessage = driver.findElement(deleteconfirmatiomessage).getText();
+            driver.findElement(continueLink);
+            return deletemessage;
+        } catch (WebDriverException e) {
+            throw new WebDriverException(e);
+        }
     }
 }
 

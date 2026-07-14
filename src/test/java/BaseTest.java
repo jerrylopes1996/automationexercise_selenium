@@ -7,7 +7,7 @@ public class BaseTest {
     protected WebDriver driver;  //findout why protected?
 
     @BeforeTest
-//    executable code must live inside a method block;
+//    executable code must live inside a method block;  ??
 //    you cannot write code statements directly inside the class body.
     public void setup() {
         driver = new ChromeDriver();
@@ -17,7 +17,7 @@ public class BaseTest {
 
     @AfterTest
     public void tearDown() {
-        if (driver != null) {  //understand the logic
+        if (driver != null) {  //if driver is still open than close it
             driver.quit();
         }
     }

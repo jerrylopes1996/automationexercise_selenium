@@ -7,15 +7,16 @@ import pages.SignupandLoginPage;
 public class RegisterNewUserTest extends BaseTest {
     HomePage homepage;
     SignupandLoginPage signuppage;
+     //homepage = new HomePage(driver);
+     // signuppage = new SignupandLoginPage(driver);  threw error here!
+    String url = "http://automationexercise.com";
 
     //Verify that home page is visible successfully Take screenshot
     @Test
     public void registerNewUser() {
-        //Navigate to url 'http://automationexercise.com'
-        driver.get("http://automationexercise.com");
+       driver.get(url);
         homepage = new HomePage(driver);
         signuppage = new SignupandLoginPage(driver);
-        //Click on 'Signup / Login' button
         homepage.clickSignUp();
         //Verify 'New User Signup!' is visible
         String verificationmessage = signuppage.verifyMessage();
