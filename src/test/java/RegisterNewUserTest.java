@@ -38,7 +38,8 @@ public class RegisterNewUserTest extends BaseTest {
 16. Verify that 'Logged in as username' is visible
 17. Click 'Delete Account' button
 */
-        signuppage.deleteAccount();
+        String finalMessage = signuppage.deleteAccount();
+        Assert.assertEquals(finalMessage,"DELETED");
 //18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
     }
 }

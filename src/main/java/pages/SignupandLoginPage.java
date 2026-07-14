@@ -15,13 +15,13 @@ public class SignupandLoginPage {
     WebDriverWait wait; //?
     private final By newUserSignUpMessage = By.xpath("//h2[text()='New User Signup!']");
     private final By nameOnSingUpPage = By.xpath("//input[@placeholder='Name']");
-    private final By name_One = By.xpath("//input[@id='name']");
+    //private final By name_One = By.xpath("//input[@id='name']");
     private final By email = By.xpath("//input[@data-qa='signup-email']");
-    private final By email_One = By.xpath("//input[@id='email']");
+   // private final By email_One = By.xpath("//input[@id='email']");
     private final By signUp = By.xpath("//button[text()='Signup']");
     private final By mr = By.xpath("//input[@type = 'radio' and @value='Mr']");
     private final By password = By.xpath("//input[@id='password']");
-
+    private final By deleteconfirmatiomessage = By.xpath("//*[text()='Account Deleted!']");
     private final By day = By.xpath("//option[@value = '3' and text()='3']");
     private final By month = By.xpath("//option[@value = '7' and text()='July']");
     private final By year = By.xpath("//option[@value = '1995' and text()='1995']");
@@ -40,8 +40,8 @@ public class SignupandLoginPage {
     private final By city = By.xpath("//input[@id='city']");
     private final By zipcode = By.xpath("//input[@id='zipcode']");
     private final By mobileNumber = By.xpath("//input[@id='mobile_number']");
-
-
+    private final By deleteBtn = By.linkText(" Delete Account");
+    private final By continueLink = By.xpath("//*[text()='Continue']");
     public SignupandLoginPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -56,7 +56,7 @@ public class SignupandLoginPage {
 
     public void enterNameandEmail() {
         driver.findElement(nameOnSingUpPage).sendKeys("Tom");
-        driver.findElement(email).sendKeys("TomCat@gmail.com");
+        driver.findElement(email).sendKeys("TomCat34909@gmail.com");  //learn and implement java random module for string!
         driver.findElement(signUp).click();
     }
 
@@ -110,7 +110,12 @@ public class SignupandLoginPage {
         wait.until(ExpectedConditions.elementToBeClickable(continueBtn)).click();
     }
 
-    public void deleteAccount() {
+    public String deleteAccount() {
+        wait.until(ExpectedConditions.elementToBeClickable(deleteBtn)).click();
+        String deletemessage ;
+        deletemessage = driver.findElement(deleteconfirmatiomessage).getText();
+        driver.findElement(continueLink);
+        return deletemessage;
     }
 }
 
