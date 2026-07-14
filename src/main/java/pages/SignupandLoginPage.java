@@ -44,7 +44,7 @@ public class SignupandLoginPage {
     private final By continueLink = By.xpath("//*[text()='Continue']");
     public SignupandLoginPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));//5  seconds s
     }
 
     public String verifyMessage() {
