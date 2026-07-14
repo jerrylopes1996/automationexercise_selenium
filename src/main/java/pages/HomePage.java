@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 public class HomePage {
     WebDriver driver;
     private final By signup_loginpage = By.xpath("//a[text() = ' Signup / Login']");
+    private final By logoutBtn = By.xpath("//a[text()='Logout']");  //?
     public HomePage(WebDriver driver) {
         this.driver = driver;
     }
@@ -13,7 +14,9 @@ public class HomePage {
         driver.findElement(signup_loginpage).click();
 
     }
-
+     public void clickLogout(){
+        driver.findElement(logoutBtn).click();  //need to implement wait strategy here
+     }
 
 
 
