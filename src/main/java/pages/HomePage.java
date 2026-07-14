@@ -7,6 +7,8 @@ public class HomePage {
     WebDriver driver;
     private final By signup_loginpage = By.xpath("//a[text() = ' Signup / Login']");
     private final By logoutBtn = By.xpath("//a[text()='Logout']");  //?
+    private final By contactuspage = By.xpath("//a/i[text()='Contact us']"); //?
+
     public HomePage(WebDriver driver) {
         this.driver = driver;
     }
@@ -19,5 +21,7 @@ public class HomePage {
      }
 
 
-
+    public void clickContactUs() {
+        driver.findElement(contactuspage).click();
+    }
 }
