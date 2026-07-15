@@ -36,6 +36,9 @@ public void contantusformtest(){
     boolean successText = contactuspage.successMessage();
     Assert.assertEquals(successText,true);
 
+   String  finalMessage = contactuspage.printSucessMessage();
+    System.out.println(finalMessage);
+
   //Click 'Home' button and verify that landed to home page successfully
     //contactuspage.navigatetoHomePage();
 

@@ -16,8 +16,8 @@ public class ContactUs {
    // get in touch message
     private final By firstMessage = By.xpath("");
     //private final By signup_loginpage = By.xpath("");
-    private final By name = By.xpath("//a[text() = ' Signup / Login']");
-    private final By email = By.xpath("/input[@placeholder='Email']");
+    private final By name = By.xpath("//input[@placeholder='Name']");
+    private final By email = By.xpath("//input[@placeholder='Email']");
     private final By subject = By.xpath("//input[@placeholder='Subject']");
     private final By message = By.xpath("//textarea[@id='message']");
     private final By choosefile = By.xpath("//input[@name='upload_file']");
@@ -28,7 +28,7 @@ public class ContactUs {
 
     WebDriver driver;
     WebDriverWait wait;
-    File uploadFile = new File("C:\\Jerry\\Automation\\automationexercise_selenium_java\\automationexercise_selenium\\src\\test\\resources\\popup.png");
+    File uploadFile = new File("src/test/resources/sample.txt");
 
     public ContactUs(WebDriver driver) {
         this.driver = driver;
@@ -46,9 +46,13 @@ public class ContactUs {
     }
 
     public void uploadFileandSubmit(){
-        WebElement fileInput = driver.findElement(choosefile);
+//        WebElement fileInput = driver.findElement(choosefile);
+//        fileInput.click();
+//        fileInput.sendKeys(uploadFile.getAbsolutePath());
+//        driver.findElement(submit).click();
+        WebElement fileInput = driver.findElement(By.cssSelector("input[type=file]"));
         fileInput.sendKeys(uploadFile.getAbsolutePath());
-        driver.findElement(By.id("file-submit")).click();
+        driver.findElement(submit).click();
 
     }
 
@@ -82,6 +86,11 @@ public class ContactUs {
         } else {
             return present;
         }
+    }
+    public String printSucessMessage(){
+        String tempMessage ;
+        tempMessage = driver.findElement(successMessage).getText();
+        return tempMessage;
     }
 
     public void navigatetoHomePage() {
