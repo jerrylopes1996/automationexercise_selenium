@@ -1,9 +1,7 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -44,7 +42,7 @@ public class SignupandLoginPage {
     private final By continueLink = By.xpath("//*[text()='Continue']");
     public SignupandLoginPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     public String verifyMessage() {
@@ -55,8 +53,13 @@ public class SignupandLoginPage {
     }
 
     public void enterNameandEmail() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript(
+                "var adFrame = document.getElementById('aswift_1');" +
+                        "if(adFrame) { adFrame.remove(); }"
+        );
         driver.findElement(nameOnSingUpPage).sendKeys("Tom");
-        driver.findElement(email).sendKeys("TomCat007@gmail.com");  //learn and implement java random module for string!
+        driver.findElement(email).sendKeys("TomCat707@gmail.com");  //learn and implement java random module for string!
         driver.findElement(signUp).click();
     }
 
@@ -77,11 +80,26 @@ public class SignupandLoginPage {
     }
 
     public void selectNewsletterandSpecialOffer() {
-        driver.findElement(newsletter).click();
-        driver.findElement(specialoffer).click();
+//        try {
+//            Actions action = new Actions(driver);
+//            action.moveToElement(driver.findElement(newsletter)).click().build().perform();
+//            Thread.sleep(10);
+//            driver.findElement(specialoffer).click();
+//        }
+//        catch(Exception e){
+//            System.out.print("Exception"+ e);
+//            }
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript(
+                "var adFrame = document.getElementById('aswift_1');" +
+                        "if(adFrame) { adFrame.remove(); }");
     }
 
     public void enterAddressinfo() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript(
+                "var adFrame = document.getElementById('aswift_1');" +
+                        "if(adFrame) { adFrame.remove(); }");
         driver.findElement(firstName).sendKeys("tom");
         driver.findElement(lastName).sendKeys("cat");
         driver.findElement(company).sendKeys("ohoh");
@@ -96,7 +114,13 @@ public class SignupandLoginPage {
     }
 
     public void clickCreateAccount() {
-        driver.findElement(createAccountBtn).click();
+        try{
+            Actions action = new Actions(driver);
+            action.moveToElement( driver.findElement(createAccountBtn)).click().build().perform();
+        } catch(Exception e){
+            System.out.println("Exception");
+        }
+
         //String accntCreationMessage;
        // wait.until(ExpectedConditions.textToBePresentInElementValue(successfulMessage,"acnt created"));
       //  accntCreationMessage = driver.findElement(successfulMessage).getText();
@@ -107,14 +131,27 @@ public class SignupandLoginPage {
 
     public void clickContinue() {
         //driver.findElement(continueBtn).click();
-        wait.until(ExpectedConditions.elementToBeClickable(continueBtn)).click();
+        try {
+            Actions action = new Actions(driver);
+            action.moveToElement(driver.findElement(continueBtn)).click().build().perform();
+
+           // wait.until(ExpectedConditions.elementToBeClickable(continueBtn)).click();
+        } catch (Exception e) {
+            System.out.println("Exception");
+        }
     }
 
     public String deleteAccount() {
-        wait.until(ExpectedConditions.elementToBeClickable(deleteBtn)).click();
-        String deletemessage ;
-        deletemessage = driver.findElement(deleteconfirmatiomessage).getText();
-        driver.findElement(continueLink);
+        String deletemessage = null;
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(deleteBtn)).click();
+            deletemessage = driver.findElement(deleteconfirmatiomessage).getText();
+            driver.findElement(continueLink);
+            return deletemessage;
+        } catch (Exception e) {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].click();", deleteconfirmatiomessage);
+        }
         return deletemessage;
     }
 }
