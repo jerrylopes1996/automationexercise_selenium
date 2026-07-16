@@ -56,7 +56,7 @@ public class SignupandLoginPage {
 
     public void enterNameandEmail() {
         driver.findElement(nameOnSingUpPage).sendKeys("Tom");
-        driver.findElement(email).sendKeys("TomCat34909@gmail.com");  //learn and implement java random module for string!
+        driver.findElement(email).sendKeys("TomCat007@gmail.com");  //learn and implement java random module for string!
         driver.findElement(signUp).click();
     }
 
