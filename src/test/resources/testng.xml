@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org">
+<suite name="E-Commerce Automation Suite">
+    <test name="Regression Tests">
+        <classes>
+            <!-- 1. Running Registration Test -->
+            <class name="RegisterNewUserTest"/>
+
+            <!-- 2. Running Login Test -->
+            <class name="LoginUserwithCorrectEmailandPassword"/>
+
+            <!-- 3. Running Products Verification -->
+            <class name="VerifyAllProductsAndProductDetailPage"/>
+
+            <!-- 4. Running Test Cases Page Verification -->
+            <class name="VerifyTestCasesPage"/>
+
+            <!-- 5. EXCLUDED: Contact Us Form Test -->
+            <class name="ContactUsFormTest">
+                <methods>
+                    <!-- This wildcard excludes all test methods in this class -->
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
